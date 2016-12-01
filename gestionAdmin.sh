@@ -48,7 +48,10 @@ if [ -d ~/$PROJECT ];then
 
 		case $CHOICE in
 			[gG])
-				/bin/bash /usr/local/bin/.gestionScripts/droitsSeul.sh -p $SELECTION_BOTTOM -f $SELECTION_FULL
+				echo "path : $SELECTION_BOTTOM"
+				echo "fichier : $SELECTION_FULL"
+				read
+				/bin/bash /usr/local/bin/.gestionScripts/droitsSeul.sh $SELECTION_BOTTOM $SELECTION_FULL
 				;;
 			[aA])
 				read -p "Choisir un fichier/répertoire : " NODE

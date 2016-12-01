@@ -8,9 +8,9 @@
 
 # Packet utilisé: acl (apt-get intall acl)
 
-#Script de gestion d'utilisateur
-#Créer par Pierre-Luc Gagnon
-#Dernière modification le 2016-12-01
+# Script de gestion d'utilisateur
+# Créer par Pierre-Luc Gagnon
+# Dernière modification le 2016-12-01
 
 #Variables
 
@@ -26,17 +26,10 @@
 #Int compteur2 - c'est le 2iem compteur pour une 2iem boucle
 #Compte le nombre de ligne dans le fichier
 
-while getopts c: option
-do
-	case "${option}"
-	in
-	    p) project=${OPTARG};; #path vers le project
-	    f) cheminFichier=${OPTARG};; #chemin vers le fichier/dossier
-	esac
-done
+project=$1 #path vers le project
+cheminFichier=$2 #chemin vers le fichier/dossier
 
-# TODO À implémanter le Path d une façon dynamique
-nbLigne=$( wc -l < $project/.project-config )
+nbLigne=$( wc -l < "$project/.project-config" )
 
 choixDroits=""
 compteur=1
@@ -158,4 +151,3 @@ read -p "Entrez le login de l'utilisateur à modifier: " loginUtilisateur
         fi
     fi
 #fi
-

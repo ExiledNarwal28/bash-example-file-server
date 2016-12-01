@@ -22,6 +22,10 @@ if [ ! -z "$CLIENT" ]
 then
 	cd /disk2/clients/
         mkdir $CLIENT
+
+	cd /home/
+	mkdir $CLIENT
+
         echo "Repertoire client cree."
 else
 	/home/optik360/ScriptsBash/Interface/accueil
@@ -35,6 +39,10 @@ else
 	then
         	cd /disk2/clients/
        		mkdir $CLIENT
+
+		cd /home/
+		mkdir $CLIENT
+
         	echo "Repertoire client cree."
 	else
         	read -p "Annulation de la creation ..."

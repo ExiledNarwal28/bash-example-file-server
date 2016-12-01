@@ -27,9 +27,9 @@ then
 
         if [[ $ADMIN =~ ^[Oo]$ ]]
         then
-                echo "admin $NEWUSER " >> .project-config
+                echo "admin	$NEWUSER " >> .project-config
         else
-                echo "user $NEWUSER " >> .project-config
+                echo "user	$NEWUSER " >> .project-config
         fi
         echo -e "\nUtilisateur '$NEWUSER' ajoute au projet '$PROJECT'"
 
@@ -108,9 +108,9 @@ else #Si il y a un des parametres qui est vide
 
 	if [[ $REPONSE =~ ^[Oo]$ ]]
 	then
-		echo "admin $NEWUSER " >> .project-config
+		echo "admin	$NEWUSER " >> .project-config
 	else
-		echo "user $NEWUSER " >> .project-config
+		echo "user	$NEWUSER " >> .project-config
 	fi
 
 	echo -e "\nUtilisateur '$NEWUSER' ajoute au projet '$PROJECT'"

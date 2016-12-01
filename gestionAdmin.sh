@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#Menu de gestion administrateur Optik 360
-#William Leblanc
-#Ce script affiche et gere le menu pour les administrateur de projets.
+# Menu de gestion administrateur Optik 360
+# William Leblanc et Fabien Roy
+# Ce script affiche et gere le menu pour les administrateur de projets.
 
 clear
 echo "Menu de gestion - Administrateur"
@@ -15,6 +15,7 @@ echo ""
 cd ~
 
 echo "Voici les projets dans lesquels vous êtes inclu :"
+echo ""
 find -L . -maxdepth 1 -xtype l
 
 echo ""
@@ -29,8 +30,8 @@ if [ -d ~/$PROJECT ];then
 	do
 		clear
 		echo "Projet choisi : $PROJECT"
+		echo ""
 		echo "Sélection : $SELECTION"
-		echo "Sélection complète : $SELECTION_FULL" # TODO enlever
 		echo ""
 		echo "Contenu de la sélection : "
 		echo ""
@@ -42,11 +43,12 @@ if [ -d ~/$PROJECT ];then
 		echo "A) Avancer dans la sélection"
 		echo "R) Reculer dans la sélection"
 
+		echo ""
 		read -p "Votre choix : " CHOICE
 
 		case $CHOICE in
 			[gG])
-				# TODO Gestion des droits
+				/bin/bash /usr/local/bin/.gestionScripts/droitsSeul.sh -p $SELECTION_BOTTOM -f $SELECTION_FULL
 				;;
 			[aA])
 				read -p "Choisir un fichier/répertoire : " NODE

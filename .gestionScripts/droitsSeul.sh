@@ -26,21 +26,20 @@
 #Int compteur2 - c'est le 2iem compteur pour une 2iem boucle
 #Compte le nombre de ligne dans le fichier
 
-# TODO À implémanter le Path d une façon dynamique
-nbLigne=$( wc -l < /disk2/clients/client_shamwow/projet_prod/.project-config )
-
 while getopts c: option
 do
 	case "${option}"
 	in
-
-	    c) cheminFichier=${OPTARG};; #chemin vers le fichier/dossier
+	    p) project=${OPTARG};; #path vers le project
+	    f) cheminFichier=${OPTARG};; #chemin vers le fichier/dossier
 	esac
 done
 
+# TODO À implémanter le Path d une façon dynamique
+nbLigne=$( wc -l < $project/.project-config )
 
 choixDroits=""
-compteur="1"
+compteur=1
 
 clear
 echo -e "Menu Principal (Ctrl+C pour quitter)\n"
@@ -48,11 +47,11 @@ echo -e "Menu Principal (Ctrl+C pour quitter)\n"
 echo -e "Modifier les droits pour les fichiers et dossier\n"
 echo -e "Utilisateurs dans le projet: \n"
 
-while [ "$compteur" -le "$nbLigne"  ]
+while [[ $compteur -le $nbLigne  ]]
 do
     #Lis le fichier ligne par ligne (Avec séparateur [TAB])
     #TODO À implémanter le Path dynamiquement
-    getLigne=$(sed -n "$compteur{p;q;}" /disk2/clients/client_shamwow/projet_prod/.project-config)
+    getLigne=$(sed -n "$compteur{p;q;}" $project/.project-config)
     #Écris la deuxième colone de getLigne (Possible avec le séparateur [TAB])
     echo $getLigne | awk '{print $2;}'
 

@@ -22,9 +22,9 @@ echo ""
 read -p "Choissisez un projet : " PROJECT
 
 if [ -d ~/$PROJECT ];then
-	SELECTION="$PROJECT"
-	SELECTION_FULL=$(readlink -f ~/$PROJECT)
-	SELECTION_BOTTOM=$SELECTION_FULL
+	SELECTION="$PROJECT" # Selection, soit ce qui sera envoyé à la gestion des droits
+	SELECTION_FULL=$(readlink -f ~/$PROJECT) # Le path complet de la sélection
+	SELECTION_BOTTOM=$SELECTION_FULL # Le path complet du root du projet
 
 	while :
 	do

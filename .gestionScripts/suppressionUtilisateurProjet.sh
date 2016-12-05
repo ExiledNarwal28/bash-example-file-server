@@ -1,28 +1,25 @@
 #!/bin/bash
 
-#Programmeur:			Camille Ritchie-Beaudin
-#Date:				17 novembre 2016
-#Date de modification:		
+# Programmeur:			Camille Ritchie-Beaudin
+# Date:				17 novembre 2016
 
-#Script qui va enlever un utilisateur du projet. Pour ce faire, on le supprime du fichier.project-config
+# Script qui va enlever un utilisateur du projet. Pour ce faire, on le supprime du fichier.project-config
 
 
-#Quand on passe des parametres au script
+# Quand on passe des parametres au script
 while getopts c:p:u: option
 do
 	case "${option}"
 	in
-		c)CLIENT=${OPTARG};; #Variable qui contient le nom du repertoire client
-		p)PROJET=${OPTARG};; #Variable qui contient le nom du repertoire projet
-		u)SUPPRESSED_USER=${OPTARG};; #Variable qui contient le nom d'utilisateur a supprimer du projet
+		c)CLIENT=${OPTARG};; # Variable qui contient le nom du repertoire client
+		p)PROJET=${OPTARG};; # Variable qui contient le nom du repertoire projet
+		u)SUPPRESSED_USER=${OPTARG};; # Variable qui contient le nom d'utilisateur a supprimer du projet
 	esac
 done
 
-
-/home/optik360/ScriptsBash/Interface/accueil
+/usr/local/bin/.gestionScripts/accueil.sh
 
 cd /disk2/clients
-
 
 #Si les parametres ne sont pas vides
 if [ ! -z "$CLIENT" ] && [ ! -z "$PROJET" ] && [ ! -z "$SUPPRESSED_USER" ]

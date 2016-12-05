@@ -12,27 +12,27 @@
 # Créer par Pierre-Luc Gagnon
 # Dernière modification le 2016-12-01
 
-#Variables
+# Variables
 
-#String loginUtilisateur - Contient le login de l'utilisateur
-#String cheminFichier - Contient le chemin vers le fichier a changer les droits
-#String getLigne - Contient la ligne (selon le compteur) du fichier .config
-#String getDroits - Contient le droit (admin/user) pour vérification
-#String choixDroit - Contient le nouveau droit de l'utilisateur
-#String choixR/W/X - contient la réponse de l'utilisateur O/N si il confirme la modification des droit RWX
+# String USER_LOGINUser - Contient le USER_LOGIN de l'utilisateur
+# String FILE_PATH - Contient le chemin vers le fichier a changer les droits
+# String getLine - Contient la ligne (selon le COUNTeur) du fichier .config
+# String getRights - Contient le droit (admin/user) pour vérification
+# String RIGHTS_CHOICE - Contient le nouveau droit de l'utilisateur
+# String RIGHTS_CHOICE_R/W/X - contient la réponse de l'utilisateur O/N si il confirme la modification des droit RWX
 
-#Int nbLignes - Contien le nombre de ligne qui a dans le fichier .config
-#Int Compteur - C'est un compteur pour la boucle while
-#Int compteur2 - c'est le 2iem compteur pour une 2iem boucle
-#Compte le nombre de ligne dans le fichier
+# Int LINE_NOs - Contien le nombre de ligne qui a dans le fichier .config
+# Int COUNT - C'est un COUNTeur pour la boucle while
+# Int COUNT2 - c'est le 2iem COUNTeur pour une 2iem boucle
+# Compte le nombre de ligne dans le fichier
 
-project=$1 #path vers le project
-cheminFichier=$2 #chemin vers le fichier/dossier
+PROJECT=$1 # path vers le PROJECT
+FILE_PATH=$2 # chemin vers le fichier/dossier
 
-nbLigne=$( wc -l < "$project/.project-config" )
+LINE_NO=$( wc -l < "$PROJECT/.PROJECT-config" )
 
-choixDroits=""
-compteur=1
+RIGHTS_CHOICE=""
+COUNT=1
 
 clear
 echo -e "Menu Principal (Ctrl+C pour quitter)\n"
@@ -40,105 +40,100 @@ echo -e "Menu Principal (Ctrl+C pour quitter)\n"
 echo -e "Modifier les droits pour les fichiers et dossier\n"
 echo -e "Utilisateurs dans le projet: \n"
 
-while [[ $compteur -le $nbLigne  ]]
+while [[ $COUNT -le $LINE_NO  ]]
 do
-    #Lis le fichier ligne par ligne (Avec séparateur [TAB])
-    #TODO À implémanter le Path dynamiquement
-    getLigne=$(sed -n "$compteur{p;q;}" $project/.project-config)
-    #Écris la deuxième colone de getLigne (Possible avec le séparateur [TAB])
-    echo $getLigne | awk '{print $2;}'
+    # Lis le fichier ligne par ligne (Avec séparateur [TAB])
+    # TODO À implémanter le Path dynamiquement
+    GET_LINE=$(sed -n "$COUNTeur{p;q;}" $PROJECT/.PROJECT-config)
+    # Écris la deuxième colone de GET_LINE (Possible avec le séparateur [TAB])
+    echo $getLine | awk '{print $2;}'
 
-    (( compteur++ ))
+    (( COUNT++ ))
 done
 
 
 
-read -p "Entrez le login de l'utilisateur à modifier: " loginUtilisateur
+read -p "Entrez le USER_LOGIN de l'utilisateur à modifier: " USER_LOGIN
 
 # TODO vérifier si l'utilisateur en question est un user et non un admin (Non fonctionnel/Non fini)
-#compteur2=1
-#while [ "$compteur2" -le "$nbLigne" ]
-#do
-#Lis le fichier ligne par ligne
+# COUNTeur2=1
+# while [ "$COUNT2" -le "$LINE_NO" ]
+# do
+# Lis le fichier ligne par ligne
 # TODO À implémenter le Path dynamiquement
-#getLigne=$(sed -n "$compteur2{p;q;}" /disk2/clients/client_shamwow/projet_prod/.project-config)
+# GET_LINE=$(sed -n "$COUNT2{p;q;}" /disk2/clients/client_shamwow/projet_prod/.PROJECT-config)
 
-#getDroits=$(echo $getLigne | awk '{print $1;}')
+# getDroits=$(echo $GET_LINE | awk '{print $1;}')
 
-#if (
+# if (
 
-#(( compteur2++ ))
-#done
+# (( COUNTeur2++ ))
+# done
 
-#if [ $getDroits -eq "user"  ]
-#then
-    #Vérifie si l'utilisteur existe
-    #TODO: modifier pour vérifier si l'utilisateur est dans le .project-config
-    if [ -z "$(getent passwd $loginUtilisateur)"  ]
+# if [ $getDroits -eq "user"  ]
+# then
+    # Vérifie si l'utilisteur existe
+    # TODO: modifier pour vérifier si l'utilisateur est dans le .PROJECT-config
+    if [ -z "$(getent passwd $USER_LOGIN)"  ]
     then
 
         read -p "Nom d'utilisateur non valide! Appuyez sur 'Enter' pour continuer"
 
     else
 
-        if [ -z  $cheminFichier ]
+        if [ -z  $FILE_PATH ]
         then
-            read -p "Entrez le chemin du fichier ou dossier à changer le droit: " cheminFichier
+            read -p "Entrez le chemin du fichier ou dossier à changer le droit: " FILE_PATH
             #Vérifie si le fichier/Dossier existe
         fi
 
-        if [ -d "$cheminFichier" ] || [ -f "$cheminFichier" ]
+        if [ -d "$FILE_PATH" ] || [ -f "$FILE_PATH" ]
         then
 
-            read -p "Voulez-vous donner le droit de lecture ? O/N: " choixR
+            read -p "Voulez-vous donner le droit de lecture ? O/N: " RIGHTS_CHOICE_R
 
-            if [ "$choixR" = "O" ] || [ "$choixR" = "o" ]
+            if [ "$RIGHTS_CHOICE_R" = "O" ] || [ "$RIGHTS_CHOICE_R" = "o" ]
             then
-
-                choixDroits="r"
-
+                RIGHTS_CHOICE="r"
             fi
 
-            read -p "Voulez-vous donner le droit d'écriture ? O/N: " choixW
+            read -p "Voulez-vous donner le droit d'écriture ? O/N: " RIGHTS_CHOICE_W
 
-            if [ "$choixW" = "O" ] || [ "$choixW" = "o" ]
+            if [ "$RIGHTS_CHOICE_W" = "O" ] || [ "$RIGHTS_CHOICE_W" = "o" ]
             then
-
-                choixDroits="$choixDroits""w"
+                RIGHTS_CHOICE="$RIGHTS_CHOICE""w"
             fi
 
-            read -p "Voulez-vous donner le droit d'exécution ? O/N: " choixX
+            read -p "Voulez-vous donner le droit d'exécution ? O/N: " RIGHTS_CHOICE_X
 
-            if [ "$choixX" = "O" ] || [ "$choixX" = "o" ]
+            if [ "$RIGHTS_CHOICE_X" = "O" ] || [ "$RIGHTS_CHOICE_X" = "o" ]
             then
-
-                choixDroits="$choixDroits""x"
-
+                RIGHTS_CHOICE="$RIGHTS_CHOICE""x"
             fi
 
-            if [ -d "$cheminFichier" ]
+            if [ -d "$FILE_PATH" ]
             then
 
-                read -p "Voulez-vous attribuer ces même droits à tout les fichiers à l'intérieur de ce dossier?" choixON
+                read -p "Voulez-vous attribuer ces même droits à tout les fichiers à l'intérieur de ce dossier?" ANSWER
 
-      	        if [ $choixON = "o" ] || [ $choixON = "O" ]
+      	        if [ $ANSWER = "o" ] || [ $ANSWER = "O" ]
 	              then
 
-                    #Set les droit sur le fichier ou dossier spécifier pour l'utilisateur spécifier
-                    #u: (Utilistateur): Droits(RWX) chemin du fichier
+                    # Set les droit sur le fichier ou dossier spécifier pour l'utilisateur spécifier
+                    # u = (Utilistateur): Droits(RWX) chemin du fichier
                     # -m = option de modifier l'ACL existant sur le fichier
 
-	                  setfacl -Rm u:$loginUtilisateur:$choixDroits $cheminFichier
+	                  setfacl -Rm u:$USER_LOGINUser:$RIGHTS_CHOICE $FILE_PATH
 
                 else
 
-	                  setfacl -m u:$loginUtilisateur:$choixDroits $cheminFichier
+	                  setfacl -m u:$USER_LOGINUser:$RIGHTS_CHOICE $FILE_PATH
 
 	              fi
 
 	          else
 
-                setfacl -m u:$loginUtilisateur:$choixDroits $cheminFichier
+                setfacl -m u:$USER_LOGINUser:$RIGHTS_CHOICE $FILE_PATH
 
 	          fi
 

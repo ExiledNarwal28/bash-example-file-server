@@ -1,23 +1,20 @@
 #!/bin/bash
 
-#Programmeur:			Camille Ritchie-Beaudin
-#Date:				14 novembre 2016
-#Date de modification:		
+# Programmeur:			Camille Ritchie-Beaudin
+# Date:				14 novembre 2016
 
-#Programme qui fait l'installation d'Openssh-client pour l'utilisateur
+# Programme qui fait l'installation d'Openssh-client pour l'utilisateur
 
+/usr/local/bin/.gestionScripts/accueil.sh
 
-/home/optik360/ScriptsBash/Interface/accueil
+read -p "Voulez-vous installer Openssh-client ? (O/N)" reponse
 
-echo "Voulez-vous installer Openssh-client ? (O/N)"
-read reponse
-echo ""
 if [[ $reponse =~ ^[Oo]$ ]]
 then
 	apt-get install openssh-client
 else
 	if [[ $reponse =~ ^[Nn]$ ]]; then
-		/home/optik360/ScriptsBash/Interface/accueil
+		/usr/local/bin/.gestionScripts/accueil.sh
 	else
 		echo "Reponse invalide."
 	fi

@@ -16,7 +16,7 @@ cd ~
 
 echo "Voici les projets dans lesquels vous êtes inclu :"
 echo ""
-find -L . -maxdepth 1 -xtype l
+find -L . -maxdepth 1 -xtype l | sed 's/^..//'
 
 echo ""
 read -p "Choissisez un projet : " PROJECT
@@ -28,17 +28,24 @@ if [ -d ~/$PROJECT ];then
 
 	while :
 	do
+		cd $SELECTION_FULL
+
 		clear
 		echo "Projet choisi : $PROJECT"
 		echo ""
 		echo "Sélection : $SELECTION"
 		echo ""
-		echo "Contenu de la sélection : "
+		echo "  Contenu de la sélection : "
 		echo ""
 
-		ls -1 $SELECTION_FULL
-
+		echo "    [Répertoires]"
+		find . -maxdepth 1 -not -path ".\/.*" -type d | sed 's/^..//'
 		echo ""
+
+		echo "    [Fichiers]"
+		find . -maxdepth 1 -not -path ".\/.*" -type f | sed 's/^..//'
+		echo ""
+
 		echo "G) Gestion des droits de la sélection"
 		echo "A) Avancer dans la sélection"
 		echo "R) Reculer dans la sélection"
@@ -48,8 +55,6 @@ if [ -d ~/$PROJECT ];then
 
 		case $CHOICE in
 			[gG])
-				echo "path : $SELECTION_BOTTOM"
-				echo "fichier : $SELECTION_FULL"
 				read
 				/bin/bash /usr/local/bin/.gestionScripts/droitsSeul.sh $SELECTION_BOTTOM $SELECTION_FULL
 				;;
@@ -65,9 +70,9 @@ if [ -d ~/$PROJECT ];then
 				;;
 			[rR])
 				if [ $SELECTION_FULL = $SELECTION_BOTTOM ];then
+					read
 					exit
 				fi
-				read
 				
 				SELECTION="${SELECTION%/*}"
 				SELECTION_FULL="${SELECTION_FULL%/*}"

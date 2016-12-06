@@ -41,7 +41,7 @@ else #Si il y a un des parametres qui est vide
 		/usr/local/bin/.gestionScripts/accueil.sh
 	        echo -e "\nParmi les clients suivants, dans lequel le projet que vous voulez est-il?\n"
 
-        	ls
+        	ls -1
 
 	        echo -e "\n"
         	read -p "Votre choix : " CLIENT
@@ -60,7 +60,7 @@ else #Si il y a un des parametres qui est vide
 		/usr/local/bin/.gestionScripts/accueil.sh
 	        echo -e "\nParmi les projets suivants, veuillez entrer le nom du projet que vous voulez: \n"
 
-		ls
+		ls -1
 
 		echo -e "\n"
         	read PROJECT

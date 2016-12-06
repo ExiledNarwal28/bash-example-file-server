@@ -37,7 +37,7 @@ else # Si les parametres sont vides
         /usr/local/bin/.gestionScripts/accueil.sh
 		echo -e "\nParmi les clients suivants, dans lequel de ces clients voulez-vous creer un projet ?\n"
 
-		ls
+		ls -1
 		echo -e "\n"
 		read CLIENT
 

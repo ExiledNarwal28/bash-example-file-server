@@ -21,8 +21,9 @@
 
 # Compte le nombre de ligne dans le .config
 
-# TODO: À implémanter le Path  dynamiquement
-LINES_NO=$( wc -l < /disk2/clients/client_shamwow/projet_prod/.project-config ) #Lis le nombre de ligne dans le fichier
+PROJECT=$1
+
+LINES_NO=$( wc -l < $PROJECT/.project-config ) #Lis le nombre de ligne dans le fichier
 COUNT=1
 
 while [ "$COUNT" -le "$LINES_NO" ]
@@ -32,7 +33,7 @@ do
     # Sed -n (enleve le pattern de sepparateur par défault pour mettre lui qui est dans le fichier
     # 2 (ligne 2) p (imprime la ligne) q (arrete de lire à la fin de la ligne)
     # TODO: À implémanter le Path dynamiquement
-    GET_LINE=$(sed -n "$COUNT{p;q;}" /disk2/clients/client_shamwow/projet_prod/.project-config)
+    GET_LINE=$(sed -n "$COUNT{p;q;}" $PROJECT/.project-config)
 
 
     #Mets dans getDroits la valeur de la premiere colone de getLigne
@@ -48,13 +49,13 @@ do
 	    # u = (Utilisateur) :(Droit en RWX) (Répertoire)
 	    # -m = Option pour modifier l'ACL existant sur le fichier
 	    # TODO: À implémanter le Path dynamiquement
-	    setfacl -Rm u:$GET_LOGIN:rwx /disk2/clients/client_shamwow/projet_prod
+	    setfacl -Rm u:$GET_LOGIN:rwx $PROJECT
 
     else [ $GET_RIGHTS = "user" ]
 	    # TODO: À implémanter le Path dynamiquement
-	    setfacl -Rm u:$GET_LOGIN:rx /disk2/clients/client_shamwow/projet_prod
+	    setfacl -Rm u:$GET_LOGIN:rx $PROJECT
     fi
 
-    setlfacl -m u:$GET_LOGIN:x /disk2/clients/client_shamwow/projet_prod/.project-config #enleve les droit sur .projectconfig
+    setlfacl -m u:$GET_LOGIN:x $PROJECT/.project-config #enleve les droit sur .projectconfig
     ((COUNT++))
 done

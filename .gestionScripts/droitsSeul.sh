@@ -29,7 +29,7 @@
 PROJECT=$1 # path vers le PROJECT
 FILE_PATH=$2 # chemin vers le fichier/dossier
 
-LINE_NO=$( wc -l < "$PROJECT/.PROJECT-config" )
+LINE_NO=$( wc -l < "$PROJECT/.project-config" )
 
 RIGHTS_CHOICE=""
 COUNT=1

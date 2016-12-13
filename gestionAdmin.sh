@@ -35,20 +35,26 @@ if [ -d ~/$PROJECT ];then
 		echo ""
 		echo "Sélection : $SELECTION"
 		echo ""
-		echo "  Contenu de la sélection : "
-		echo ""
+		
+		# On vérifie si la sélection est un répertoire
+		if [ -d $SELECTION_FULL ]; then
+			echo "  Contenu de la sélection : "
+			echo ""
+			echo "    [Répertoires]"
+			find . -maxdepth 1 -not -path ".\/.*" -type d | sed 's/^..//'
+			echo ""
 
-		echo "    [Répertoires]"
-		find . -maxdepth 1 -not -path ".\/.*" -type d | sed 's/^..//'
-		echo ""
+			echo "    [Fichiers]"
+			find . -maxdepth 1 -not -path ".\/.*" -type f | sed 's/^..//'
+			echo ""
 
-		echo "    [Fichiers]"
-		find . -maxdepth 1 -not -path ".\/.*" -type f | sed 's/^..//'
-		echo ""
-
-		echo "G) Gestion des droits de la sélection"
-		echo "A) Avancer dans la sélection"
-		echo "R) Reculer dans la sélection"
+			echo "G) Gestion des droits de la sélection"
+			echo "A) Avancer dans la sélection"
+			echo "R) Reculer dans la sélection"
+		else
+			echo "G) Gestion des droits de la sélection"
+			echo "R) Reculer dans la sélection"
+		fi
 
 		echo ""
 		read -p "Votre choix : " CHOICE
@@ -59,13 +65,18 @@ if [ -d ~/$PROJECT ];then
 				/bin/bash /usr/local/bin/.gestionScripts/droitsSeul.sh $SELECTION_BOTTOM $SELECTION_FULL
 				;;
 			[aA])
-				read -p "Choisir un fichier/répertoire : " NODE
+				# On vérifie si la sélection est un répertoire
+				if [ -d $SELECTION_FULL ]; then
+					read -p "Choisir un fichier/répertoire : " NODE
 
-				if [ -d "$SELECTION_FULL/$NODE" ] || [ -f "$SELECTION_FULL/$NODE" ]; then
-					SELECTION="$SELECTION/$NODE"
-					SELECTION_FULL="$SELECTION_FULL/$NODE"
+					if [ -d "$SELECTION_FULL/$NODE" ] || [ -f "$SELECTION_FULL/$NODE" ]; then
+						SELECTION="$SELECTION/$NODE"
+						SELECTION_FULL="$SELECTION_FULL/$NODE"
+					else
+						echo "Aucun dossier de ce nom existe."
+					fi
 				else
-					echo "Aucun dossier de ce nom existe."
+					read -p "Choix erroné. Recommencez."
 				fi
 				;;
 			[rR])

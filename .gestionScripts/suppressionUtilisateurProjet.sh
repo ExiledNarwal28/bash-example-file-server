@@ -36,7 +36,7 @@ else #Si les parametres sont vides
 
 	until [[ -d "$CLIENT" ]]
 	do
-        	/home/optik360/ScriptsBash/Interface/accueil
+        	/usr/local/bin/.gestionScripts/accueil.sh
 	        echo -e "\nParmi les clients suivants, dans lequel de ces clients le projet que vous voulez est-il?\n"
         	ls
 
@@ -54,7 +54,7 @@ else #Si les parametres sont vides
 
 	while [[ "$FLAG_TROUVE" = false ]]
 	do
-	        /home/optik360/ScriptsBash/Interface/accueil
+        	/usr/local/bin/.gestionScripts/accueil.sh
         	echo -e "\nParmi les projets suivants, veuillez entrer le nom du projet que vous voulez: \n"
 
 	        ls
@@ -77,7 +77,7 @@ else #Si les parametres sont vides
 
 	while [[ "$FLAG_EXISTE" = false ]]
 	do
-        	/home/optik360/ScriptsBash/Interface/accueil
+        	/usr/local/bin/.gestionScripts/accueil.sh
         	echo -e "\nVeuillez entrer le nom de l'utilisateur que vous voulez supprimer du projet '$PROJET': "
 	        read SUPPRESSED_USER
 
@@ -89,7 +89,7 @@ else #Si les parametres sont vides
         	fi
 	done
 
-	/home/optik360/ScriptsBash/Interface/accueil
+	/usr/local/bin/.gestionScripts/accueil.sh
 
 	grep -vwE "$SUPPRESSED_USER" .project-config > .tempo
 	cp .tempo .project-config

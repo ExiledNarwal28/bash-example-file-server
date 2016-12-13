@@ -18,7 +18,7 @@ do
 	echo "1) Ajouter un répertoire client"
 	echo "2) Ajouter un répertoire projet"
 	echo "3) Ajouter un utilisateur / administrateur"
-	echo "4) Retirer  un utilisateur / administrateur d'un projet" # Changer le nom de "suppressionUtilisateurProjet" pour "retirerMembreProjet".
+	echo "4) Retirer un utilisateur / administrateur d'un projet" # Changer le nom de "suppressionUtilisateurProjet" pour "retirerMembreProjet".
 	echo ""
 	echo "0) Quitter"
 	echo ""
@@ -44,7 +44,7 @@ do
 
 		# Retirer un utilisateur / administrateur d'un projet
 		"4")
-			/bin/bash /home/optik360/ScriptsBash/Interface/suppressionUtilisateurProjet.sh
+			/bin/bash /usr/local/bin/.gestionScripts/suppressionUtilisateurProjet.sh
 			;;
 
 

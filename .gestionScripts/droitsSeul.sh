@@ -44,14 +44,12 @@ while [[ $COUNT -le $LINE_NO  ]]
 do
     # Lis le fichier ligne par ligne (Avec séparateur [TAB])
     # TODO À implémanter le Path dynamiquement
-    GET_LINE=$(sed -n "$COUNTeur{p;q;}" $PROJECT/.PROJECT-config)
+    GET_LINE=$(sed -n "$COUNT{p;q;}" $PROJECT/.project-config)
     # Écris la deuxième colone de GET_LINE (Possible avec le séparateur [TAB])
     echo $getLine | awk '{print $2;}'
 
     (( COUNT++ ))
 done
-
-
 
 read -p "Entrez le USER_LOGIN de l'utilisateur à modifier: " USER_LOGIN
 
@@ -73,7 +71,7 @@ read -p "Entrez le USER_LOGIN de l'utilisateur à modifier: " USER_LOGIN
 # if [ $getDroits -eq "user"  ]
 # then
     # Vérifie si l'utilisteur existe
-    # TODO: modifier pour vérifier si l'utilisateur est dans le .PROJECT-config
+    # TODO: modifier pour vérifier si l'utilisateur est dans le .project-config
     if [ -z "$(getent passwd $USER_LOGIN)"  ]
     then
 
@@ -123,17 +121,17 @@ read -p "Entrez le USER_LOGIN de l'utilisateur à modifier: " USER_LOGIN
                     # u = (Utilistateur): Droits(RWX) chemin du fichier
                     # -m = option de modifier l'ACL existant sur le fichier
 
-	                  setfacl -Rm u:$USER_LOGINUser:$RIGHTS_CHOICE $FILE_PATH
+	                  setfacl -Rm u:$USER_LOGIN:$RIGHTS_CHOICE $FILE_PATH
 
                 else
 
-	                  setfacl -m u:$USER_LOGINUser:$RIGHTS_CHOICE $FILE_PATH
+	                  setfacl -m u:$USER_LOGIN:$RIGHTS_CHOICE $FILE_PATH
 
 	              fi
 
 	          else
 
-                setfacl -m u:$USER_LOGINUser:$RIGHTS_CHOICE $FILE_PATH
+                setfacl -m u:$USER_LOGIN:$RIGHTS_CHOICE $FILE_PATH
 
 	          fi
 

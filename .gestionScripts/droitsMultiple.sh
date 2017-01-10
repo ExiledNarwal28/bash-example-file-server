@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 
 #       *********************************************
@@ -29,7 +29,6 @@ COUNT=1
 while [ "$COUNT" -le "$LINES_NO" ]
 do
 
-
     # Sed -n (enleve le pattern de sepparateur par défault pour mettre lui qui est dans le fichier
     # 2 (ligne 2) p (imprime la ligne) q (arrete de lire à la fin de la ligne)
     # TODO: À implémanter le Path dynamiquement
@@ -56,6 +55,6 @@ do
 	    setfacl -Rm u:$GET_LOGIN:rx $PROJECT
     fi
 
-    setlfacl -m u:$GET_LOGIN:x $PROJECT/.project-config #enleve les droit sur .projectconfig
+    setfacl -m u:$GET_LOGIN:x $PROJECT/.project-config #enleve les droit sur .projectconfig
     ((COUNT++))
 done

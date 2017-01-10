@@ -39,7 +39,7 @@ else #Si il y a un des parametres qui est vide
 	until [[ -d "$CLIENT" ]]
 	do
 		/usr/local/bin/.gestionScripts/accueil.sh
-	        echo -e "\nParmi les clients suivants, dans lequel le projet que vous voulez est-il?\n"
+	        echo -e "\nChoisissez un client\n"
 
         	ls -1
 
@@ -47,7 +47,7 @@ else #Si il y a un des parametres qui est vide
         	read -p "Votre choix : " CLIENT
 
         	if [[ ! -d "$CLIENT" ]]; then
-              	read -p "Le client que vous avez entre n'existe pas. Appuyez sur enter pour continuer ..."
+              	read -p "Le client que vous avez entrÃ n'existe pas. Appuyez sur entrer pour continuer ..."
         	fi
 	done
 
@@ -94,7 +94,8 @@ else #Si il y a un des parametres qui est vide
 	# On fait le lien avec le projet dans le home du user
 	if ! [ -f "/home/$NEWUSER/$PROJECT" ]
 	then
-		ln -s /disk2/clients/$CLIENT/$PROJECT /home/$NEWUSER/
+		mkdir /disk2/clients/$CLIENT/$PROJECT /home/$NEWUSER/$PROJECT
+		mount --bind /disk2/clients/$CLIENT/$PROJECT /home/$NEWUSER/$PROJECT
 	fi
 
 	/usr/local/bin/.gestionScripts/accueil.sh
@@ -106,6 +107,8 @@ else #Si il y a un des parametres qui est vide
 	else
 		echo "user	$NEWUSER " >> .project-config
 	fi
+
+	/usr/local/bin/.gestionScripts/droitsMultiple.sh /disk2/clients/$CLIENT/$PROJECT 
 
 	echo -e "\nUtilisateur '$NEWUSER' ajoute au projet '$PROJECT'"
 fi

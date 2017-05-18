@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 
 # Menu pour les employés d'Optik 360
 # William Leblanc
@@ -36,7 +36,6 @@ do
 			/bin/bash /usr/local/bin/.gestionScripts/creationProjet.sh
 			;;
 
-
 		# Ajouter un utilisateur / admin
 		"3")
 			/bin/bash /usr/local/bin/.gestionScripts/ajoutUtilisateurProjet.sh
@@ -46,7 +45,6 @@ do
 		"4")
 			/bin/bash /usr/local/bin/.gestionScripts/suppressionUtilisateurProjet.sh
 			;;
-
 
 		# Le break cause la fin du "case". Le "while" prend fin aussi puisque "0" a été saisie.
 		"0")
